@@ -30,4 +30,10 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'Container'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker nav'
+    repository: 'in28min/hello-world-python:0.0.1.RELEASE'
+    command: 'buildAndPush'
+    Dockerfile: 'RSdevops-/Dockerfile'
 
