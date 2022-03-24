@@ -21,3 +21,9 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
+- task: Docker@2
+  inputs:
+    containerRegistry: 'docker nav'
+    repository: 'in28min/hello-world-python:0.0.1.RELEASE'
+    command: 'buildAndPush'
+    Dockerfile: '**/Dockerfile'
