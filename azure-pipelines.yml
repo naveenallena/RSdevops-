@@ -21,9 +21,13 @@ steps:
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
     goals: 'package'
-- task: Docker@2
+- task: CopyFiles@2
   inputs:
-    containerRegistry: 'docker nav'
-    repository: 'in28min/hello-world-python:0.0.1.RELEASE'
-    command: 'buildAndPush'
-    Dockerfile: '**/Dockerfile'
+    Contents: '**/*.war'
+    TargetFolder: '$(build.artifactstagingdirectory)'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
